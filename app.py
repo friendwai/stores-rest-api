@@ -31,10 +31,10 @@ api = Api(app)
 #
 # connection.close()
 #SQLalchemy can create table hence deleted create_table.py(code above from the file)
-@app.before_first_request
-def create_tables():
-    db.create_all()
-
+# @app.before_first_request
+# def create_tables():
+#     db.create_all()
+# moving to run.py, from uswgi.ini heroku could run:app
 
 jwt = JWT(app, authenticate, identity) # /auth
 
@@ -97,5 +97,4 @@ api.add_resource(UserRegister, '/register')
 if __name__ == '__main__':
     from db import db
     db.init_app(app)
-    # app.run(port=5000, debug=True)
-    # removing this to run on Heroku
+    app.run(port=5000, debug=True)
