@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask # request  # not needing moving to item.py
 from flask_restful import Api # Resource , reqparse # not needing moving to item.py
 from flask_jwt import JWT # jwt_required  # not needing moving to item.py
@@ -8,7 +10,7 @@ from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.secret_key = 'jose'
